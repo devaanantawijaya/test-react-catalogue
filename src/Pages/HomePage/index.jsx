@@ -4,6 +4,7 @@ import UseProducts from "../../Hook/useProducts";
 import UseCategory from "../../Hook/useCategory";
 import { IoIosSearch } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const {
@@ -228,16 +229,20 @@ export default function HomePage() {
           <div key={product.id} className="relative group">
             {/* Title */}
             <div className="absolute p-3 transform -translate-x-1/2 bg-white border-2 w-72 rounded-xl bottom-5 left-1/2">
-              <h1 className="text-sm font-bold truncate">{product.title}</h1>
-              <div className="flex items-center gap-x-1">
-                <FaStar className="text-yellow-600" />
-                <p className="text-sm font-bold">{product.rating}</p>
-                <p className="text-sm text-gray-500">{`(${product.minimumOrderQuantity} Reviews)`}</p>
-              </div>
-              <div className="flex gap-x-2">
-                <p className="font-bold">{`$${product.price}`}</p>
-                <p className="text-gray-500 line-through">{`$${product.discountPercentage}`}</p>
-              </div>
+              <Link to={`/detail-product/${product?.id}`}>
+                <h1 className="text-sm font-bold truncate">{product.title}</h1>
+                <div className="flex items-center gap-x-1">
+                  <FaStar className="text-yellow-600" />
+                  <p className="text-sm font-bold">{product.rating}</p>
+                  <p className="text-sm text-gray-500">{`(${product.minimumOrderQuantity} Reviews)`}</p>
+                </div>
+                <div className="flex gap-x-2">
+                  <p className="font-bold">{`$${product.price}`}</p>
+                  <p className="text-gray-500 line-through">{`$${
+                    product.discountPercentage + product.price
+                  }`}</p>
+                </div>
+              </Link>
               {/* Add to Cart */}
               <button className="absolute hidden w-full py-2 mt-2 text-center text-white transform -translate-x-1/2 bg-green-900 rounded-lg -bottom-12 left-1/2 group-hover:block hover:bg-green-950">
                 Add To Cart
@@ -248,11 +253,13 @@ export default function HomePage() {
             {loadingProduts ? (
               <div className="bg-gray-300 shadow-lg rounded-xl w-80 h-96 animate-pulse"></div>
             ) : (
-              <img
-                src={product.thumbnail}
-                alt={product.title}
-                className="w-full border-2 shadow-lg h-96 md:w-80 rounded-xl bg-slate-100"
-              />
+              <Link to={`/detail-product/${product?.id}`}>
+                <img
+                  src={product.thumbnail}
+                  alt={product.title}
+                  className="w-full border-2 shadow-lg h-96 md:w-80 rounded-xl bg-slate-100"
+                />
+              </Link>
             )}
           </div>
         ))}
