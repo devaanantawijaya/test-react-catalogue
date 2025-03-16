@@ -22,8 +22,8 @@ export default function DetailProductPage() {
         <h1>/</h1>
         <h1 className="font-bold">{detailProduct.title}</h1>
       </div>
-      <div className="grid grid-cols-2 px-10 gap-x-10">
-        <div>
+      <div className="grid px-10 md:grid-cols-2 gap-x-10">
+        <div className="mb-5 md:mb-0">
           <img
             src={detailProduct.images?.[0]}
             alt={detailProduct.title}
@@ -49,7 +49,7 @@ export default function DetailProductPage() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-x-3">
+            <div className="flex items-center mb-5 gap-x-3">
               <h1 className="text-5xl font-bold">${detailProduct.price}</h1>
               <h1 className="text-xl text-red-600 line-through">
                 ${detailProduct.discountPercentage + detailProduct.price}
